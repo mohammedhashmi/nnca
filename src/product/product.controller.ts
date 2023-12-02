@@ -1,40 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { ProductService } from './product.service';
+import { Request } from 'express';
 
 @Controller('/products')
 export class ProductController {
+  constructor(private productService: ProductService) {}
   @Get()
   products() {
-    return [
-      {
-        id: 1,
-        name: 'product 1',
-        description: 'product 1',
-        price: 100,
-      },
-      {
-        id: 2,
-        name: 'product 2',
-        description: 'product 2',
-        price: 200,
-      },
-      {
-        id: 3,
-        name: 'product 3',
-        description: 'product 3',
-        price: 300,
-      },
-      {
-        id: 500,
-        name: 'india product',
-        description: 'india product',
-        price: 500,
-      },
-      {
-        id: 600,
-        name: 'india product',
-        description: 'india product',
-        price: 600,
-      },
-    ];
+    return this.productService.list();
+  }
+
+  @Get('/:id')
+  product(@Param() params: { id: number }) {
+    return {
+      id: params.id,
+      name: `product ${params.id}`,
+      description: `product description of ${params.id}`,
+      price: 100 * params.id,
+    };
+  }
+
+  @Post()
+  createProduct(@Req() req: Request) {
+    return this.productService.create(req.body);
   }
 }
