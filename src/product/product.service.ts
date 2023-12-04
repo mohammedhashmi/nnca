@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Request } from 'express';
+import { ProductCreateDto } from './dto/product-create.dto';
 
 @Injectable()
 export class ProductService {
@@ -38,9 +38,11 @@ export class ProductService {
     ];
   }
 
-  create(body: Request['body']) {
+  create(productCreateDto: ProductCreateDto) {
+    const { name, description } = productCreateDto;
     return {
-      name: body,
+      name,
+      description,
       message: `post request performed successfully`,
     };
   }

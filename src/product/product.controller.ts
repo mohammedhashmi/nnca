@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -9,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Request } from 'express';
+import { ProductCreateDto } from './dto/product-create.dto';
 
 @Controller('/products')
 export class ProductController {
@@ -29,17 +31,17 @@ export class ProductController {
   }
 
   @Post()
-  create(@Req() req: Request) {
-    return this.productService.create(req.body);
+  createProduct(@Body() productCreateDto: ProductCreateDto) {
+    return this.productService.create(productCreateDto);
   }
 
   @Patch('/:id')
-  update(@Param() params: { id: number }, @Req() req: Request) {
+  updateProduct(@Param() params: { id: number }, @Req() req: Request) {
     return this.productService.update(params, req);
   }
 
   @Delete('/:id')
-  delete(@Param() params: { id: number }, @Req() req: Request) {
+  deleteProduct(@Param() params: { id: number }, @Req() req: Request) {
     return this.productService.delete(params, req);
   }
 }
