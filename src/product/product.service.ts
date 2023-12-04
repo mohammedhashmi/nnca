@@ -44,4 +44,24 @@ export class ProductService {
       message: `post request performed successfully`,
     };
   }
+
+  update(params, req) {
+    return {
+      id: params.id,
+      name: 'mohammed hashmi',
+      email: 'hashmi.smf@gmail.com',
+      body: req.body,
+      message: 'product updated successfully',
+    };
+  }
+
+  delete(params, req) {
+    return {
+      id: params.id,
+      name: 'Deleted product name',
+      description: 'deleted product description',
+      body: req.body,
+      message: 'product deleted successfully',
+    };
+  }
 }

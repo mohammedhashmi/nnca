@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Req } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Request } from 'express';
 
@@ -21,7 +29,17 @@ export class ProductController {
   }
 
   @Post()
-  createProduct(@Req() req: Request) {
+  create(@Req() req: Request) {
     return this.productService.create(req.body);
+  }
+
+  @Patch('/:id')
+  update(@Param() params: { id: number }, @Req() req: Request) {
+    return this.productService.update(params, req);
+  }
+
+  @Delete('/:id')
+  delete(@Param() params: { id: number }, @Req() req: Request) {
+    return this.productService.delete(params, req);
   }
 }
