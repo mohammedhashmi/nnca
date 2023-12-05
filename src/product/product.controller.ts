@@ -7,10 +7,8 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  Req,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { Request } from 'express';
 import { ProductCreateDto } from './dto/product-create.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
@@ -23,13 +21,8 @@ export class ProductController {
   }
 
   @Get('/:id')
-  product(@Param() params: { id: number }) {
-    return {
-      id: params.id,
-      name: `product ${params.id}`,
-      description: `product description of ${params.id}`,
-      price: 100 * params.id,
-    };
+  product(@Param('id', ParseIntPipe) id: number) {
+    return this.productService.get(id);
   }
 
   @Post()
@@ -46,10 +39,7 @@ export class ProductController {
   }
 
   @Delete('/:id')
-  deleteProduct(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateProductDTO: UpdateProductDto,
-  ) {
-    return this.productService.delete(id, updateProductDTO);
+  deleteProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.productService.delete(id);
   }
 }

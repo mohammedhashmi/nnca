@@ -8,5 +8,8 @@ export class UpdateProductDto {
   description: string;
 
   @IsNumber()
+  price: number;
+
+  @IsNumber()
   id: number;
 }

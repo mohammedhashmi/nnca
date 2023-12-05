@@ -26,22 +26,26 @@ export class ProductService {
     };
   }
 
-  update(id, updateProductDto: UpdateProductDto) {
+  get(id) {
+    const product = this.productRepository.findOne({ where: { id } });
+    debugger;
+    return product;
+  }
+
+  async update(id, updateProductDto: UpdateProductDto) {
+    const updated = await this.productRepository.update({ id }, updateProductDto);
+    const product = await this.productRepository.findOne({ where: { id } });
     return {
-      id: id,
-      name: 'mohammed hashmi',
-      email: 'hashmi.smf@gmail.com',
-      updateProductDto,
+      updated,
+      product,
       message: 'product updated successfully',
     };
   }
 
-  delete(id, updateProductDTO) {
+  delete(id) {
+    const product = this.productRepository.delete({ id });
     return {
-      id: id,
-      name: 'Deleted product name',
-      description: 'deleted product description',
-      updateProductDTO,
+      product,
       message: 'product deleted successfully',
     };
   }
