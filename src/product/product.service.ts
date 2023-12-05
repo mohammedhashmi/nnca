@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductCreateDto } from './dto/product-create.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -47,22 +48,22 @@ export class ProductService {
     };
   }
 
-  update(params, req) {
+  update(id, updateProductDto: UpdateProductDto) {
     return {
-      id: params.id,
+      id: id,
       name: 'mohammed hashmi',
       email: 'hashmi.smf@gmail.com',
-      body: req.body,
+      updateProductDto,
       message: 'product updated successfully',
     };
   }
 
-  delete(params, req) {
+  delete(id, updateProductDTO) {
     return {
-      id: params.id,
+      id: id,
       name: 'Deleted product name',
       description: 'deleted product description',
-      body: req.body,
+      updateProductDTO,
       message: 'product deleted successfully',
     };
   }

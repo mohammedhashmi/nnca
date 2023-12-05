@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -11,6 +12,7 @@ import {
 import { ProductService } from './product.service';
 import { Request } from 'express';
 import { ProductCreateDto } from './dto/product-create.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller('/products')
 export class ProductController {
@@ -36,12 +38,18 @@ export class ProductController {
   }
 
   @Patch('/:id')
-  updateProduct(@Param() params: { id: number }, @Req() req: Request) {
-    return this.productService.update(params, req);
+  updateProduct(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() upddateProductDTO: UpdateProductDto,
+  ) {
+    return this.productService.update(id, upddateProductDTO);
   }
 
   @Delete('/:id')
-  deleteProduct(@Param() params: { id: number }, @Req() req: Request) {
-    return this.productService.delete(params, req);
+  deleteProduct(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateProductDTO: UpdateProductDto,
+  ) {
+    return this.productService.delete(id, updateProductDTO);
   }
 }
