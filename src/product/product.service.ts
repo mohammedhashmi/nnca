@@ -32,6 +32,11 @@ export class ProductService {
     return product;
   }
 
+  async findByName(name) {
+    const product = await this.productRepository.findOne({ where: { name } });
+    return product;
+  }
+
   async update(id, updateProductDto: UpdateProductDto) {
     const updated = await this.productRepository.update({ id }, updateProductDto);
     const product = await this.productRepository.findOne({ where: { id } });

@@ -10,4 +10,7 @@ export class ProductCreateDto {
   @IsPositive({ message: 'Price must be a positive number.' })
   @IsNumber()
   price: number;
+
+  @IsString()
+  password: string;
 }

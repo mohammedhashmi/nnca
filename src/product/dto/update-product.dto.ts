@@ -12,4 +12,7 @@ export class UpdateProductDto {
 
   @IsNumber()
   id: number;
+
+  @IsString()
+  password: string;
 }

@@ -13,4 +13,7 @@ export class Product {
 
   @Column()
   price: number;
+
+  @Column()
+  password: string;
 }
