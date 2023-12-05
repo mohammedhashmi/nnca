@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     UserModule,
     ProductModule,
+    // TODO connect it via docker db
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
